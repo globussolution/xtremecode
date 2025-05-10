@@ -25,18 +25,18 @@
 .ant-tabs-nav {
   margin: 0 !important;
 }
-
 .ant-tabs-tab {
   padding: 8px 16px !important;
   margin: 1 !important;
   transition: all 0.3s;
 }
-
+.ant-table-thead > tr > th {
+  background-color: rgb(227, 232, 238) !important;
+}
 .ant-tabs-tab-active {
   /* background-color: #f0f0f0 !important; */
   border-radius: 4px 4px 0 0 !important;
 }
-
 .ant-tabs-ink-bar {
   background-color: #04004f !important;
   height: 2px !important;
