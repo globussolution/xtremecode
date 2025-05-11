@@ -1,5 +1,3 @@
-import React from "react"
-
 import { useState, useEffect } from "react"
 import { Layout, Menu, theme, Drawer, Button } from "antd"
 import { MenuOutlined } from "@ant-design/icons"
@@ -82,7 +80,7 @@ const AppLayout = ({ children, fullLogo = defaultFullLogo, smallLogo = defaultSm
       >
         <Menu
           className="font-semibold"
-          style={{ backgroundColor: "#04004F" }}
+          style={{ backgroundColor: "#04004F", marginTop: "30px" }}
           theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
@@ -112,7 +110,7 @@ const AppLayout = ({ children, fullLogo = defaultFullLogo, smallLogo = defaultSm
         </div>
         <Menu
           className="border-t border-gray-500 font-semibold"
-          style={{ paddingTop: "15%", marginTop: "3%", backgroundColor: "#04004F" }}
+          style={collapsed? {paddingTop: "25px", backgroundColor: "#04004F"} : { paddingTop: "15%", marginTop: "3%", backgroundColor: "#04004F" }}
           theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
