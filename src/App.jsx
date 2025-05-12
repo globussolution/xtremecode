@@ -6,6 +6,7 @@ import Multiplexers from './Admin/Admin Pages/Media/MediaComponents/Multiplexers
 import Sources from './Admin/Admin Pages/Media/MediaComponents/Sources'
 import VODs from './Admin/Admin Pages/Media/MediaComponents/VODs'
 import DVBCards from './Admin/Admin Pages/Media/MediaComponents/DVBCards'
+import Create from './Admin/Admin Pages/Media/MediaComponents/Create'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Media/>}></Route>
+          <Route path="/media/create" element={<Create/>}></Route>
           <Route path="/media/templates" element={<Templates/>}></Route>
           <Route path="/media/multiplexers" element={<Multiplexers/>}></Route>
           <Route path="/media/sources" element={<Sources/>}></Route>

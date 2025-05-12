@@ -400,12 +400,15 @@ function Media() {
       dataIndex: "stream",
       key: "stream",
       render: (text, record) => (
-        <div className="flex gap-3">
+        <div className="flex gap-3" onClick={(e) => { /* Row click logic if needed */ }}>
           <input
             type="checkbox"
             className="mr-2"
             checked={selectedRowKeys.includes(record.key)}
-            onChange={(e) => e.stopPropagation()}
+            onChange={(e) => {
+              e.stopPropagation(); // Prevent row click when checkbox is clicked
+              // Handle checkbox change logic here
+            }}
           />
           <div className="flex flex-col">
             <span className="text-blue-700 font-medium">{text}</span>
@@ -507,20 +510,32 @@ function Media() {
     {
       title: "",
       key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button icon={<ReloadOutlined />} shape="circle" />
-          <Button icon={<PlayCircleOutlined />} shape="circle" />
-          <div className="w-12 h-6 bg-gray-200 rounded-full flex items-center p-1">
-            <div className="w-4 h-4 rounded-full bg-blue-600 ml-auto"></div>
-          </div>
-        </Space>
-      ),
+      render: (_, record) => {
+        const toggleId = `toggle-${record.key}`; // Create a unique ID
+        return (
+          <Space size="middle">
+            <Button icon={<ReloadOutlined />} shape="circle" />
+            <Button icon={<PlayCircleOutlined />} shape="circle" />
+            <div className="w-12 h-6 rounded-full flex items-center p-1 ml-2">
+              <label
+                htmlFor={toggleId} // Use the unique ID here
+                className="flex items-center cursor-pointer"
+              >
+                <div className="relative">
+                  <input id={toggleId} type="checkbox" className="sr-only" /> {/* Use the unique ID here */}
+                  <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                  <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                </div>
+              </label>
+            </div>
+          </Space>
+        );
+      },
       responsive: ["md"],
     },
-  ]
+  ];
 
-  // Table columns configuration for compact view
+// Table columns configuration for compact view
   const compactColumns = [
     {
       title: () => (
@@ -585,44 +600,56 @@ function Media() {
       title: "Output",
       dataIndex: "output",
       key: "output",
-      render: (output, record) => (
-        <div>
-          <div className="flex items-center">
-            <span className="mr-4">
-              <span className="bg-gray-200 rounded-full px-2 py-1 text-xs">{output.clients}</span>
-            </span>
-            <span className="mr-4">{output.running}</span>
-            <div className="w-12 h-6 bg-gray-200 rounded-full flex items-center p-1 mr-2">
-              <div className="w-4 h-4 rounded-full bg-blue-600 ml-auto"></div>
+      render: (output, record) => {
+        const toggleId = `compact-toggle-${record.key}`; // Unique ID for compact view
+        return (
+          <div>
+            <div className="flex items-center">
+              <span className="mr-4">
+                <span className="bg-gray-200 rounded-full px-2 py-1 text-xs">{output.clients}</span>
+              </span>
+              <span className="mr-4">{output.running}</span>
+              <div className="w-12 h-6 rounded-full flex items-center p-1 ml-2">
+                <label
+                  htmlFor={toggleId} // Use the unique ID
+                  className="flex items-center cursor-pointer"
+                >
+                  <div className="relative">
+                    <input id={toggleId} type="checkbox" className="sr-only" /> {/* Use the unique ID */}
+                    <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                    <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                  </div>
+                </label>
+              </div>
+              <Button icon={<ReloadOutlined />} shape="circle" className="ml-2" />
+              <Button icon={<PlayCircleOutlined />} shape="circle" className="ml-2" />
+              <Button
+                icon={expandedRows[record.key] ? <UpOutlined /> : <DownOutlined />}
+                shape="circle"
+                className="ml-2"
+                onClick={(e) => toggleRowExpansion(record.key, e)}
+              />
             </div>
-            <Button icon={<ReloadOutlined />} shape="circle" className="ml-2" />
-            <Button icon={<PlayCircleOutlined />} shape="circle" className="ml-2" />
-            <Button
-              icon={expandedRows[record.key] ? <UpOutlined /> : <DownOutlined />}
-              shape="circle"
-              className="ml-2"
-              onClick={(e) => toggleRowExpansion(record.key, e)}
-            />
-          </div>
 
-          {expandedRows[record.key] && (
-            <div className="mt-2 pl-8">
-              <div>
-                Thumbnails: <span style={{ color: "#ff0000" }}>Off</span>
+            {expandedRows[record.key] && (
+              <div className="mt-2 pl-8">
+                <div>
+                  Thumbnails: <span style={{ color: "#ff0000" }}>Off</span>
+                </div>
+                <div>
+                  Authorization: <span style={{ color: "#ff0000" }}>Off</span>
+                </div>
+                <div>
+                  Content is DRM-free <span className="text-blue-600">Turn on DRM</span>.
+                </div>
               </div>
-              <div>
-                Authorization: <span style={{ color: "#ff0000" }}>Off</span>
-              </div>
-              <div>
-                Content is DRM-free <span className="text-blue-600">Turn on DRM</span>.
-              </div>
-            </div>
-          )}
-        </div>
-      ),
+            )}
+          </div>
+        );
+      },
       responsive: ["md"],
     },
-  ]
+  ];
 
   const paginationOptions = ["10", "25", "50", "100"]
 
@@ -645,12 +672,14 @@ function Media() {
             </div>
 
             {/* Tabs */}
-            <div className={`flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
+            <div className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
+              <Link to="/media/create">  
               <button
                 className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
               >
                 <IoAddCircleOutline />
               </button>
+              </Link>
               <Tabs defaultActiveKey="1" className="mb-0" size={isMobile ? "small" : "middle"}>
                 <TabPane tab={<Link to="/">Streams</Link>} key="1" />
                 <TabPane tab={<Link to="/media/templates">Templates</Link>} key="2" />
@@ -796,9 +825,9 @@ function Media() {
                 </div>
                 <div className="flex gap-2">
                   <Button onClick={() => setSelectedRowKeys([])}>Cancel</Button>
-                  <Button type="primary" style={{ backgroundColor: "#1890ff" }}>
+                  <button className="px-3 py-1 cursor-pointer rounded-md transition-all border border-[#08027d] bg-[#08027d] text-white hover:bg-white hover:text-[#08027d]">
                     Edit Selected
-                  </Button>
+                  </button>
                 </div>
               </div>
             )}

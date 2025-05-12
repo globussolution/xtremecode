@@ -1,27 +1,52 @@
+import { useState } from "react"
 import AppLayout from "../../../Admin Components/AppLayout";
-import TabPane from "antd/es/tabs/TabPane";
-import { Tabs } from "antd"
-import { useState } from "react";
+import { Table, Card, Typography, Tabs } from "antd"
+import { CaretUpOutlined } from "@ant-design/icons"
 import { IoAddCircleOutline } from "react-icons/io5"
 import { Link } from "react-router-dom"
+import TabPane from "antd/es/tabs/TabPane";
+
+const { Title } = Typography
 
 function DVBCards() {
   const [isMobile, setIsMobile] = useState(false)
 
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+    },
+  ]
+
+  const data = []
+
   return (
-    <>
-      <AppLayout>
+    <AppLayout>
         {/* Mobile Title */}
         <div className="md:hidden px-4 py-2">
            <h1 className="text-xl font-semibold">DVB cards</h1>
         </div>
-        {/* Tabs */}
-        <div className={`flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
-          <button
-            className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
-          >
-            <IoAddCircleOutline />
-          </button>
+
+       {/* Tabs */}
+        <div className={`scrollHide w-full overflow-x-auto lg:px-0 px-2 flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
+          <Link to="/media/create">  
+              <button
+                className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
+              >
+                <IoAddCircleOutline />
+              </button>
+          </Link>
           <Tabs defaultActiveKey="6" className="mb-0" size={isMobile ? "small" : "middle"}>
             <TabPane tab={<Link to="/">Streams</Link>} key="1" />
             <TabPane tab={<Link to="/media/templates">Templates</Link>} key="2" />
@@ -31,10 +56,30 @@ function DVBCards() {
             <TabPane tab={<Link to="/media/dvbcards">DVB cards</Link>} key="6" />
           </Tabs>
         </div>
-        <h1>DVB cards</h1>
-      </AppLayout>
-    </>
-  );
+        
+      <Card
+        title={
+          <div className="flex justify-between items-center">
+            <Title level={5} style={{ margin: 0 }}>
+              Installed boards
+            </Title>
+          </div>
+        }
+        bordered={false}
+        style={{ marginBottom: 24 }}
+      >
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={false}
+          locale={{ emptyText: "No DVB cards found" }}
+          className="bg-gray-100"
+          rowClassName="bg-gray-100"
+          headerRow={{ style: { backgroundColor: "#f0f2f5" } }}
+        />
+      </Card>
+    </AppLayout>
+  )
 }
 
 export default DVBCards;

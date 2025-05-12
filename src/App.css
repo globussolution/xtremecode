@@ -1,3 +1,32 @@
+/* Prevent page scrolling */
+html,
+body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.scrollHide::-webkit-scrollbar{
+    display: none;
+}
+.shadowClass{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+@media (max-width: 600px) {
+  body {
+  overflow: scroll !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+}
+
+/* Toggle */
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #0b00da;
+}
+
 /* Custom styles to match the exact table structure in the image */
 .ant-table-thead > tr > th {
   background-color: #f0f2f5 !important;
@@ -27,21 +56,11 @@
   line-height: 1.5 !important;
 }
 
-/* Prevent page scrolling */
-html,
-body {
-  overflow: hidden !important;
-  height: 100vh !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 /* Ensure the layout takes full height without scrolling */
 #root,
 .ant-layout {
   height: 100vh !important;
   max-height: 100vh !important;
-  overflow: hidden !important;
 }
 
 /* Make only the table content scrollable */

@@ -15,13 +15,16 @@ function Templates() {
         <div className="md:hidden px-4 py-2">
            <h1 className="text-xl font-semibold">Templates</h1>
         </div>
+
         {/* Tabs */}
-        <div className={`flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
-          <button
-            className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
-          >
-            <IoAddCircleOutline />
-          </button>
+        <div className={`scrollHide w-full overflow-x-auto lg:px-0 px-2 flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
+            <Link to="/media/create">  
+              <button
+                className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
+              >
+                <IoAddCircleOutline />
+              </button>
+            </Link>
           <Tabs defaultActiveKey="2" className="mb-0" size={isMobile ? "small" : "middle"}>
             <TabPane tab={<Link to="/">Streams</Link>} key="1" />
             <TabPane tab={<Link to="/media/templates">Templates</Link>} key="2" />
@@ -31,7 +34,8 @@ function Templates() {
             <TabPane tab={<Link to="/media/dvbcards">DVB cards</Link>} key="6" />
           </Tabs>
         </div>
-        <h1>Templates</h1>
+
+        <h1 className="text-center mt-10 font-semibold">No templates found</h1>
       </AppLayout>
     </>
   );
