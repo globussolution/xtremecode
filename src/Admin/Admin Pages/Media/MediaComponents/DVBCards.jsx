@@ -1,7 +1,6 @@
 import { useState } from "react"
 import AppLayout from "../../../Admin Components/AppLayout";
 import { Table, Card, Typography, Tabs } from "antd"
-import { CaretUpOutlined } from "@ant-design/icons"
 import { IoAddCircleOutline } from "react-icons/io5"
 import { Link } from "react-router-dom"
 import TabPane from "antd/es/tabs/TabPane";

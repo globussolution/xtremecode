@@ -825,9 +825,11 @@ function Media() {
                 </div>
                 <div className="flex gap-2">
                   <Button onClick={() => setSelectedRowKeys([])}>Cancel</Button>
+                  <Link to={`/media/${selectedRowKeys}`}>
                   <button className="px-3 py-1 cursor-pointer rounded-md transition-all border border-[#08027d] bg-[#08027d] text-white hover:bg-white hover:text-[#08027d]">
                     Edit Selected
                   </button>
+                  </Link>
                 </div>
               </div>
             )}

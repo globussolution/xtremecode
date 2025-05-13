@@ -7,6 +7,14 @@ import Sources from './Admin/Admin Pages/Media/MediaComponents/Sources'
 import VODs from './Admin/Admin Pages/Media/MediaComponents/VODs'
 import DVBCards from './Admin/Admin Pages/Media/MediaComponents/DVBCards'
 import Create from './Admin/Admin Pages/Media/MediaComponents/Create'
+import EditStream from './Admin/Admin Pages/Media/MediaComponents/EditStream';
+import MediaInput from './Admin/Admin Pages/Media/MediaComponents/MediaInput';
+import Transcoder from './Admin/Admin Pages/Media/MediaComponents/Transcoder';
+import DVR from './Admin/Admin Pages/Media/MediaComponents/DVR';
+import Output from './Admin/Admin Pages/Media/MediaComponents/Output';
+import EPG from './Admin/Admin Pages/Media/MediaComponents/EPG';
+import Auth from './Admin/Admin Pages/Media/MediaComponents/Auth';
+import PlaySessions from './Admin/Admin Pages/Media/MediaComponents/PlaySessions';
 
 function App() {
 
@@ -21,6 +29,15 @@ function App() {
           <Route path="/media/sources" element={<Sources/>}></Route>
           <Route path="/media/vods" element={<VODs/>}></Route>
           <Route path="/media/dvbcards" element={<DVBCards/>}></Route>
+          <Route path="/media/:id" element={<EditStream/>}></Route>
+          <Route path="/media/overview" element={<EditStream/>}></Route>
+          <Route path="/media/input" element={<MediaInput/>}></Route>
+          <Route path="/media/transcoder" element={<Transcoder/>}></Route>
+          <Route path="/media/dvr" element={<DVR/>}></Route>
+          <Route path="/media/output" element={<Output/>}></Route>
+          <Route path="/media/epg" element={<EPG/>}></Route>
+          <Route path="/media/auth" element={<Auth/>}></Route>
+          <Route path="/media/playsessions" element={<PlaySessions/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
