@@ -134,7 +134,7 @@ function Transcoder() {
 
       <div className="p-4 h-[calc(100vh-150px)] overflow-y-auto">
         {/* Audio Configuration */}
-        <div className="mb-8 border p-4 rounded-md bg-white">
+        <div className="mb-8 border border-gray-300 p-4 rounded-md bg-white">
           <h2 className="text-xl font-semibold mb-4">Audio</h2>
           <Row gutter={16} align="middle" className="mb-2">
             <Col>
@@ -237,7 +237,7 @@ function Transcoder() {
         </div>
 
         {/* Video Configuration */}
-        <div className="mb-8 border p-4 rounded-md bg-white">
+        <div className="mb-8 border border-gray-300 p-4 rounded-md bg-white">
           <h2 className="text-xl font-semibold mb-4">Video</h2>
           <Row gutter={16} align="middle" className="mb-2">
             <Col>
@@ -249,13 +249,12 @@ function Transcoder() {
               </Checkbox>
             </Col>
             <Col>
-              <Button
-                type="primary"
+              <button
+                className="cursor-pointer transition-all bg-[#08009b] border border-[#08009b] text-white hover:text-[#08009b] hover:bg-white font-semibold px-3 py-1.5 rounded-md"
                 onClick={handleAddVideoTrack}
-                icon={<PlusOutlined />}
               >
-                Add Video Track
-              </Button>
+                Add Video Track <PlusOutlined />
+              </button>
             </Col>
           </Row>
 
@@ -567,11 +566,11 @@ function Transcoder() {
 
               <Divider />
 
-              <Row gutter={16} align="middle" className="mb-2">
+              <Row gutter={16} align="middle" className="mb-5">
                 <Col xs={24} sm={12} md={6}>
-                  <Button onClick={() => handleSelectLogo(index)}>
+                  <button className="cursor-pointer transition-all bg-[#08009b] border border-[#08009b] text-white hover:text-[#08009b] hover:bg-white font-semibold px-3 py-1.5 rounded-md" onClick={() => handleSelectLogo(index)}>
                     {track.logo ? "Change Logo" : "Select Logo"}
-                  </Button>
+                  </button>
                   {track.logo && (
                     <span className="ml-2">{track.logo.name}</span>
                   )}

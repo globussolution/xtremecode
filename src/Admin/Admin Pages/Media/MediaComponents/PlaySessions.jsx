@@ -183,10 +183,10 @@ function PlaySessions() {
                         scroll={{ x: 'max-content' }}
                     />
 
-                    <div className="mt-4 flex justify-start gap-2">
-                        <Button danger>Delete Stream</Button>
-                        <Button>Save</Button>
-                    </div>
+                <div className="flex justify-end gap-2 mt-3">
+                    <Button danger>Delete Stream</Button>
+                    <Button type="primary">Save</Button>
+                </div>
                 </div>
             </AppLayout>
         </>

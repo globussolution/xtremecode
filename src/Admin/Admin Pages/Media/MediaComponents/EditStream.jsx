@@ -1,27 +1,27 @@
 import { useState } from 'react';
-import { Tabs } from 'antd';
+import { Tabs, Button, Input, Select, Switch, Space, Card } from 'antd';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
-import { Input } from 'antd';
-import { Select } from 'antd';
-import { Switch } from 'antd';
-import { Space } from 'antd';
-import { Card } from 'antd';
 import { PlayCircleOutlined } from '@ant-design/icons';
 import AppLayout from '../../../Admin Components/AppLayout';
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 
 const EditStream = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [name, setName] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [name, setName] = useState('HBO_Max');
+  const [title, setTitle] = useState('Title');
+  const [description, setDescription] = useState('Description');
   const [template, setTemplate] = useState('');
   const [isOnline, setIsOnline] = useState(true);
-  const [inputMediaInfo, setInputMediaInfo] = useState({ video: '', audio: '' });
-  const [outputMediaInfo, setOutputMediaInfo] = useState({ video: '', audio: '' });
-    const [htmlCode, setHtmlCode] = useState('<iframe style="width:640px; height:480px;" allowfullscreen src="http://example.com"></iframe>');
+  const [inputMediaInfo] = useState({ video: 'v1 h264 320x240 (200kbps)', audio: 'a1 aac stereo eng (128kbps)' });
+  const [outputMediaInfo] = useState({ video: 'v1 h264 320x240 (72kbps)', audio: 'a1 aac stereo eng (128kbps)' });
+  const [htmlCode] = useState('<iframe style="width:640px; height:480px;" allowfullscreen src="http://193.239.193.161/hls/HBO_Max/embed.html"></iframe>');
+  const [staticToggle, setStaticToggle] = useState(true);
+  const [onDemandToggle, setOnDemandToggle] = useState(false);
+  const [sdToggle, setSdToggle] = useState(true);
+  const [bitrate] = useState('174kbit/s');
+  const [duration] = useState('3d 7h');
 
   const templateOptions = [
     { label: 'Not selected', value: '' },
@@ -29,166 +29,144 @@ const EditStream = () => {
     { label: 'Template 2', value: 'template2' },
   ];
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  useState(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <AppLayout>
-
-    <div className="min-h-screen">
-      {/* Tabs */}
-      <div
-        className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
-          isMobile ? "px-2" : "px-4"
-        }`}
-      >
-        <Tabs
-          defaultActiveKey="1"
-          className="mb-0"
-          size={isMobile ? "small" : "middle"}
+      <div className="min-h-screen">
+        {/* Tabs */}
+        <div
+          className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
+            isMobile ? 'px-2' : 'px-4'
+          }`}
         >
-          <TabPane tab={<Link to="/media/overview">Overview</Link>} key="1" />
-          <TabPane tab={<Link to="/media/input">Input</Link>} key="2" />
-          <TabPane tab={<Link to="/media/transcoder">Transcoder</Link>} key="3" />
-          <TabPane tab={<Link to="/media/dvr">DVR</Link>} key="4" />
-          <TabPane tab={<Link to="/media/output">Output</Link>} key="5" />
-          <TabPane tab={<Link to="/media/epg">EPG</Link>} key="6" />
-          <TabPane tab={<Link to="/media/auth">Auth</Link>} key="7" />
-          <TabPane tab={<Link to="/media/playsessions">Play sessions</Link>} key="8" />
-        </Tabs>
-      </div>
+          <Tabs
+            defaultActiveKey="1"
+            className="mb-0"
+            size={isMobile ? 'small' : 'middle'}
+          >
+            <TabPane tab={<Link to="/media/overview">Overview</Link>} key="1" />
+            <TabPane tab={<Link to="/media/input">Input</Link>} key="2" />
+            <TabPane tab={<Link to="/media/transcoder">Transcoder</Link>} key="3" />
+            <TabPane tab={<Link to="/media/dvr">DVR</Link>} key="4" />
+            <TabPane tab={<Link to="/media/output">Output</Link>} key="5" />
+            <TabPane tab={<Link to="/media/epg">EPG</Link>} key="6" />
+            <TabPane tab={<Link to="/media/auth">Auth</Link>} key="7" />
+            <TabPane tab={<Link to="/media/playsessions">Play sessions</Link>} key="8" />
+          </Tabs>
+        </div>
 
-      {/* Main Content */}
-      <div className="p-6 h-[calc(107vh-150px)] overflow-y-auto">
-        {/* Heading */}
-        <h1 className="text-xl font-semibold mb-5">Edit Stream</h1>
+        {/* Main Content */}
+        <div className="p-4 md:p-6 lg:p-4 mt-5 h-[calc(100vh-150px)] overflow-y-auto">
+          {/* Top Row with Name, Title, Description, Template */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+            <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
+            <Select
+              value={template}
+              onChange={setTemplate}
+              options={templateOptions}
+              placeholder="Template"
+            />
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left Column */}
-          <div>
-            <Card className="mb-6">
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <Input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-48"
-                    placeholder="Enter Name"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <Input
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="w-48"
-                    placeholder="Enter Title"
-                  />
-                </div>
-                <div className="flex items-start justify-between">
-                  <Input.TextArea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-48"
-                    rows={3}
-                    placeholder="Enter Description"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <Select
-                    value={template}
-                    onChange={setTemplate}
-                    options={templateOptions}
-                    className="w-48"
-                    placeholder="Select a Template"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <label className="font-medium">Status</label>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left Column */}
+            <div className="lg:col-span-2">
+              <Card className="mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <Space>
-                    <Switch
-                      checked={isOnline}
-                      onChange={setIsOnline}
-                      className="mr-2"
-                    />
-                    <span className={isOnline ? 'text-green-500' : 'text-gray-500'}>
-                      {isOnline ? 'Online' : 'Offline'}
-                    </span>
+                    <button className="cursor-pointer transition-all bg-[#08009b] border border-[#08009b] text-white hover:text-[#08009b] hover:bg-white font-semibold px-5 py-1 rounded-md">Disable</button>
+                    <button className="cursor-pointer transition-all bg-[#ff0095] border border-[#ff0095] text-white hover:text-[#ff0095] hover:bg-white font-semibold px-5 py-1 rounded-md">Stop</button>
+                  </Space>
+                  <Space>
+                    <Switch checked={staticToggle} onChange={setStaticToggle} size="small" /> Static
+                    <Switch checked={onDemandToggle} onChange={setOnDemandToggle} size="small" /> On Demand
                   </Space>
                 </div>
-                <div className="flex items-center justify-between">
-                  <label className="font-medium">
-                    <span className="mr-2">Input media info</span>
-                  </label>
-                  <div>
-                    <p>{inputMediaInfo.video || "N/A"}</p>
-                    <p>{inputMediaInfo.audio || "N/A"}</p>
-                  </div>
+                <div className="relative w-full h-64 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden">
+                  <img
+                    src="http://193.239.193.161/hls/HBO_Max/preview.jpg"
+                    alt="Video Preview"
+                    className="absolute inset-0 object-cover w-full h-full"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = '/placeholder.png'; // Use a local placeholder image
+                    }}
+                  />
+                  <PlayCircleOutlined className="text-4xl text-gray-500 z-10" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <label className="font-medium">
-                    <span className="mr-2">Output media info</span>
-                  </label>
-                  <div>
-                    <p>{outputMediaInfo.video || "N/A"}</p>
-                    <p>{outputMediaInfo.audio || "N/A"}</p>
-                  </div>
+                <div className="mt-4 flex gap-2">
+                  <Button>HLS</Button>
+                  <Button>MSE</Button>
+                  <Button>DVR</Button>
                 </div>
-              </div>
-            </Card>
-
-            {/* Video Player Preview */}
-            <Card className="mb-6">
-              <div className="flex flex-col items-center justify-center h-64 bg-gray-200 rounded-md">
-                <PlayCircleOutlined className="text-4xl text-gray-500" />
-                <p className="mt-2 text-gray-700">Video Player Preview</p>
-              </div>
-            </Card>
-
-            {/* Embed HTML Player */}
-            <Card>
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <label className="font-medium">
+                <div className="mt-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
                     Embed HTML player on your website
                   </label>
+                  <div className="flex gap-2">
+                    <Input
+                      value={htmlCode}
+                      onChange={(e) => {}} // Prevent editing for now
+                      className="w-full"
+                    />
+                    <Button onClick={() => navigator.clipboard.writeText(htmlCode)}>
+                      Copy HTML
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex gap-3 items-center">
-                  <Input
-                    value={htmlCode}
-                    onChange={(e) => setHtmlCode(e.target.value)}
-                    className="w-full mr-2"
-                    placeholder="Paste HTML Code"
-                  />
-                  <Button
-                    icon={<></>}
-                    onClick={() => {
-                      navigator.clipboard.writeText(htmlCode);
-                    }}
-                  >
-                    Copy HTML
-                  </Button>
+              </Card>
+            </div>
+
+            {/* Right Column */}
+            <div>
+              <Card className="mb-6">
+                <h3 className="font-semibold mb-2">Online</h3>
+                <div className="mb-4">
+                  <p className="font-medium">Input media info</p>
+                  <p className="text-gray-600">{inputMediaInfo.video}</p>
+                  <p className="text-gray-600">{inputMediaInfo.audio}</p>
                 </div>
-              </div>
-            </Card>
+                <div>
+                  <p className="font-medium">Output media info</p>
+                  <p className="text-gray-600">{outputMediaInfo.video}</p>
+                  <p className="text-gray-600">{outputMediaInfo.audio}</p>
+                </div>
+              </Card>
+
+              <Card>
+                <div className="flex items-center justify-between mb-2">
+                  <Space>
+                    <Switch checked={sdToggle} onChange={setSdToggle} size="small" /> SD
+                    <span>{bitrate}</span>
+                  </Space>
+                  <span>{duration}</span>
+                </div>
+                <div className="h-48 bg-gray-200 rounded-md flex items-center justify-center">
+                  <span className="text-gray-700">Graph Placeholder (In/Out/Clients)</span>
+                </div>
+              </Card>
+            </div>
           </div>
 
-          {/* Right Column (Placeholder for Graph) */}
-          <div>
-            <Card>
-              <div className="h-64 bg-gray-200 rounded-md flex items-center justify-center">
-                <span className="text-gray-700">
-                  Graph Placeholder (In/Out/Clients)
-                </span>
-              </div>
-            </Card>
+          {/* Bottom Buttons */}
+          <div className="w-full bg-white p-4 flex justify-end gap-4">
+            <Button danger>Delete Stream</Button>
+            <Button type="primary">Save</Button>
           </div>
         </div>
-
-        {/* Bottom Buttons */}
-        <div className="w-full bg-white p-4 flex justify-end gap-4 z-10">
-          <Button danger>Delete Stream</Button>
-          <Button type="primary">Save</Button>
-        </div>
-
       </div>
-    </div>
     </AppLayout>
   );
 };
