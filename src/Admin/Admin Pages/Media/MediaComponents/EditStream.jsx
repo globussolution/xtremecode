@@ -156,7 +156,7 @@ const EditStream = () => {
                   </Space>
                 </div>
                 <div className="relative w-full h-64 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden">
-                  <img
+                  {/* <img
                     src="http://193.239.193.161/hls/HBO_Max/preview.jpg"
                     alt="Video Preview"
                     className="absolute inset-0 object-cover w-full h-full"
@@ -164,7 +164,7 @@ const EditStream = () => {
                       e.target.onerror = null;
                       e.target.src = "/placeholder.png"; // Use a local placeholder image
                     }}
-                  />
+                  /> */}
                   <PlayCircleOutlined className="text-4xl text-gray-500 z-10" />
                 </div>
                 <div className="mt-4 flex gap-2">
