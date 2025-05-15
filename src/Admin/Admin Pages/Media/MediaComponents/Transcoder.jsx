@@ -12,7 +12,6 @@ import {
   Col,
 } from "antd";
 import { Link } from "react-router-dom";
-import TabPane from "antd/es/tabs/TabPane";
 import {
   MinusCircleOutlined,
   PlusOutlined,
@@ -102,6 +101,41 @@ function Transcoder() {
     setVideoTracks(newTracks);
   };
 
+  const items = [
+    {
+      key: "1",
+      label: <Link to="/media/overview">Overview</Link>,
+    },
+    {
+      key: "2",
+      label: <Link to="/media/input">Input</Link>,
+    },
+    {
+      key: "3",
+      label: <Link to="/media/transcoder">Transcoder</Link>,
+    },
+    {
+      key: "4",
+      label: <Link to="/media/dvr">DVR</Link>,
+    },
+    {
+      key: "5",
+      label: <Link to="/media/output">Output</Link>,
+    },
+    {
+      key: "6",
+      label: <Link to="/media/epg">EPG</Link>,
+    },
+    {
+      key: "7",
+      label: <Link to="/media/auth">Auth</Link>,
+    },
+    {
+      key: "8",
+      label: <Link to="/media/playsessions">Play sessions</Link>,
+    },
+  ];
+
   return (
     <AppLayout>
       {/* Tabs */}
@@ -114,22 +148,8 @@ function Transcoder() {
           defaultActiveKey="3"
           className="mb-0"
           size={isMobile ? "small" : "middle"}
-        >
-          <TabPane tab={<Link to="/media/overview">Overview</Link>} key="1" />
-          <TabPane tab={<Link to="/media/input">Input</Link>} key="2" />
-          <TabPane
-            tab={<Link to="/media/transcoder">Transcoder</Link>}
-            key="3"
-          />
-          <TabPane tab={<Link to="/media/dvr">DVR</Link>} key="4" />
-          <TabPane tab={<Link to="/media/output">Output</Link>} key="5" />
-          <TabPane tab={<Link to="/media/epg">EPG</Link>} key="6" />
-          <TabPane tab={<Link to="/media/auth">Auth</Link>} key="7" />
-          <TabPane
-            tab={<Link to="/media/playsessions">Play sessions</Link>}
-            key="8"
-          />
-        </Tabs>
+          items={items}
+        />
       </div>
 
       <div className="p-4 h-[calc(100vh-150px)] overflow-y-auto">
@@ -260,7 +280,7 @@ function Transcoder() {
 
           {videoTracks.map((track, index) => (
             <div key={index} className="mb-4 p-3 rounded-md bg-gray-50">
-              <Row gutter={16}  style={{marginBottom: '25px'}}>
+              <Row gutter={16} style={{ marginBottom: "25px" }}>
                 <Col xs={24} sm={12} md={3}>
                   <Select
                     disabled={copyVideoFromInput}
@@ -331,39 +351,45 @@ function Transcoder() {
               </Row>
 
               <Collapse
-                style={{marginBottom: '25px'}}
+                style={{ marginBottom: "25px" }}
                 activeKey={advancedOptionsOpen ? ["1"] : []}
                 onChange={() => setAdvancedOptionsOpen(!advancedOptionsOpen)}
-              >
-                <Panel header="Advanced options" key="1">
-                  <Row gutter={16} align="middle">
-                    <Col xs={24} sm={12} md={6}>
-                      <Select
-                        value={pixelFormat}
-                        style={{ width: "100%" }}
-                        onChange={(value) => setPixelFormat(value)}
-                        placeholder="Pixel format"
-                      >
-                        <Option value="- Not selected -">
-                          - Not selected -
-                        </Option>
-                        {/* Add pixel format options */}
-                      </Select>
-                    </Col>
-                    <Col>
-                      <Checkbox
-                        checked={improvePerformance}
-                        onChange={(e) =>
-                          setImprovePerformance(e.target.checked)
-                        }
-                      >
-                        Improve the transcoder performance by running it as part
-                        of Flussonic Media Server (use with caution)
-                      </Checkbox>
-                    </Col>
-                  </Row>
-                </Panel>
-              </Collapse>
+                items={[
+                  // 'children' ki jagah 'items' ka istemaal karein
+                  {
+                    key: "1",
+                    header: "Advanced options",
+                    children: (
+                      <Row gutter={16} align="middle">
+                        <Col xs={24} sm={12} md={6}>
+                          <Select
+                            value={pixelFormat}
+                            style={{ width: "100%" }}
+                            onChange={(value) => setPixelFormat(value)}
+                            placeholder="Pixel format"
+                          >
+                            <Option value="- Not selected -">
+                              - Not selected -
+                            </Option>
+                            {/* Add pixel format options */}
+                          </Select>
+                        </Col>
+                        <Col>
+                          <Checkbox
+                            checked={improvePerformance}
+                            onChange={(e) =>
+                              setImprovePerformance(e.target.checked)
+                            }
+                          >
+                            Improve the transcoder performance by running it as
+                            part of Flussonic Media Server (use with caution)
+                          </Checkbox>
+                        </Col>
+                      </Row>
+                    ),
+                  },
+                ]}
+              />
 
               <div className="flex justify-end gap-2">
                 <Button onClick={() => handleDuplicateVideoTrack(index)}>
@@ -568,7 +594,10 @@ function Transcoder() {
 
               <Row gutter={16} align="middle" className="mb-5">
                 <Col xs={24} sm={12} md={6}>
-                  <button className="cursor-pointer transition-all bg-[#08009b] border border-[#08009b] text-white hover:text-[#08009b] hover:bg-white font-semibold px-3 py-1.5 rounded-md" onClick={() => handleSelectLogo(index)}>
+                  <button
+                    className="cursor-pointer transition-all bg-[#08009b] border border-[#08009b] text-white hover:text-[#08009b] hover:bg-white font-semibold px-3 py-1.5 rounded-md"
+                    onClick={() => handleSelectLogo(index)}
+                  >
                     {track.logo ? "Change Logo" : "Select Logo"}
                   </button>
                   {track.logo && (
@@ -602,40 +631,46 @@ function Transcoder() {
                 )}
               </Row>
 
-              <Collapse>
-                <Panel header="Extended" key="1">
-                  <Row gutter={16} className="mb-2">
-                    <Col xs={24} sm={12} md={8}>
-                      <Input
-                        placeholder="New key"
-                        disabled={copyVideoFromInput}
-                        value={track.extendedKey}
-                        onChange={(e) =>
-                          handleExtendedInputChange(
-                            index,
-                            "extendedKey",
-                            e.target.value
-                          )
-                        }
-                      />
-                    </Col>
-                    <Col xs={24} sm={12} md={8}>
-                      <Input
-                        placeholder="New value"
-                        disabled={copyVideoFromInput}
-                        value={track.extendedValue}
-                        onChange={(e) =>
-                          handleExtendedInputChange(
-                            index,
-                            "extendedValue",
-                            e.target.value
-                          )
-                        }
-                      />
-                    </Col>
-                  </Row>
-                </Panel>
-              </Collapse>
+              <Collapse
+                items={[
+                  {
+                    key: "1",
+                    header: "Extended",
+                    children: (
+                      <Row gutter={16} className="mb-2">
+                        <Col xs={24} sm={12} md={8}>
+                          <Input
+                            placeholder="New key"
+                            disabled={copyVideoFromInput}
+                            value={track.extendedKey}
+                            onChange={(e) =>
+                              handleExtendedInputChange(
+                                index,
+                                "extendedKey",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </Col>
+                        <Col xs={24} sm={12} md={8}>
+                          <Input
+                            placeholder="New value"
+                            disabled={copyVideoFromInput}
+                            value={track.extendedValue}
+                            onChange={(e) =>
+                              handleExtendedInputChange(
+                                index,
+                                "extendedValue",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </Col>
+                      </Row>
+                    ),
+                  },
+                ]}
+              />
             </div>
           ))}
         </div>
@@ -646,7 +681,9 @@ function Transcoder() {
           <Button>Disable Transcoder</Button>
           <Button>Copy Settings</Button>
           <Button danger>Delete Stream</Button>
-          <button className="shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md">Save</button>
+          <button className="shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md">
+            Save
+          </button>
         </div>
       </div>
     </AppLayout>

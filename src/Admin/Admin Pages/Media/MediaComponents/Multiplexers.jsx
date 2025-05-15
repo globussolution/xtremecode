@@ -12,6 +12,34 @@ const { Search } = Input;
 
 function Multiplexers() {
   const [isMobile, setIsMobile] = useState(false);
+  
+  const items = [
+  {
+    key: '1',
+    label: <Link to="/">Streams</Link>,
+  },
+  {
+    key: '2',
+    label: <Link to="/media/templates">Templates</Link>,
+  },
+  {
+    key: '3',
+    label: <Link to="/media/multiplexers">Multiplexers</Link>,
+  },
+  {
+    key: '4',
+    label: <Link to="/media/sources">Sources</Link>,
+  },
+  {
+    key: '5',
+    label: <Link to="/media/vods">VODs</Link>,
+  },
+  {
+    key: '6',
+    label: <Link to="/media/dvbcards">DVB cards</Link>,
+  },
+];
+
 
   return (
     <AppLayout>
@@ -21,30 +49,18 @@ function Multiplexers() {
       </div>
 
       {/* Tabs */}
-      <div className={`scrollHide w-full overflow-x-auto lg:px-0 px-2 flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
-          <Link to="/media/create">  
-              <button
-                className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
-              >
-                <IoAddCircleOutline />
-              </button>
-          </Link>
-        <Tabs
-          defaultActiveKey="3"
-          className="mb-0"
-          size={isMobile ? "small" : "middle"}
+       <div
+          className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
+            isMobile ? "px-2" : "px-4"
+          }`}
         >
-          <TabPane tab={<Link to="/">Streams</Link>} key="1" />
-          <TabPane tab={<Link to="/media/templates">Templates</Link>} key="2" />
-          <TabPane
-            tab={<Link to="/media/multiplexers">Multiplexers</Link>}
-            key="3"
+          <Tabs
+            defaultActiveKey="3"
+            className="mb-0"
+            size={isMobile ? "small" : "middle"}
+            items={items}
           />
-          <TabPane tab={<Link to="/media/sources">Sources</Link>} key="4" />
-          <TabPane tab={<Link to="/media/vods">VODs</Link>} key="5" />
-          <TabPane tab={<Link to="/media/dvbcards">DVB cards</Link>} key="6" />
-        </Tabs>
-      </div>
+        </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 lg:px-0 px-4">
        
@@ -57,7 +73,7 @@ function Multiplexers() {
                 </Title>
               </div>
             }
-            bordered={false}
+            variant="default"
             style={{ backgroundColor: "#f9f9f9" }}
           >
             <Search
@@ -83,8 +99,7 @@ function Multiplexers() {
 
         <div>
           <Card
-            style={{ backgroundColor: "#f9f9f9", border: "none" }}
-            bodyStyle={{ padding: "16px" }}
+            style={{ backgroundColor: "#f9f9f9", border: "none", padding: "16px" }}
             title={
               <div className="flex justify-between items-center">
                 <Title level={5} style={{ margin: 0 }}>

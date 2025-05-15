@@ -99,109 +99,116 @@ function Cluster() {
         // Add logic to cancel changes on cluster configurations
     };
 
+    const items = [
+  {
+    key: 'create',
+    label: (
+      <span className="flex items-center cursor-pointer text-lg font-bold px-3 py-1 bg-[#08027d] hover:bg-blue-700 text-white rounded-md">
+        <IoAddCircleOutline />
+      </span>
+    ),
+    children: (
+      <div className="bg-white border border-gray-300 shadow-md rounded-md p-6">
+        <label htmlFor="newPeerHostname" className="block text-gray-700 text-sm font-bold mb-2">
+          New peer hostname
+        </label>
+        <div className="relative mb-4">
+          <Input
+            id="newPeerHostname"
+            value={newPeerHostname}
+            onChange={(e) => setNewPeerHostname(e.target.value)}
+            className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            suffix={<InfoCircleOutlined className="text-blue-500 cursor-pointer" />}
+          />
+        </div>
+        <div className="flex justify-start gap-2">
+          <button
+            className="transition-all shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md"
+            onClick={handleCreateSave}
+          >
+            Save
+          </button>
+          <button
+            onClick={handleCreateCancel}
+            className="transition-all shadow-md cursor-pointer border border-gray-300 hover:border-[#08027d] text-black hover:text-[#08027d] px-5 py-1 rounded-md"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    ),
+  },
+  {
+    key: 'cluster',
+    label: 'Cluster',
+    children: (
+      <div className='border border-gray-300 rounded-md px-5 py-5'>
+        <div className="grid gap-4 mb-6 md:grid-cols-2">
+          <div>
+            <label htmlFor="peerHostname" className="block text-gray-700 text-sm font-bold mb-2">
+              This peer hostname
+            </label>
+            <div className="relative">
+              <Input
+                disabled
+                id="peerHostname"
+                value={peerHostname}
+                onChange={(e) => setPeerHostname(e.target.value)}
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                suffix={<InfoCircleOutlined className="text-blue-500 cursor-pointer" />}
+              />
+            </div>
+            <small className="text-gray-500">
+              How this peer should be referred from other Flussonic Media Server peers
+            </small>
+          </div>
+
+          <div>
+            <label htmlFor="clusterKey" className="block text-gray-700 text-sm font-bold mb-2">
+              Cluster key
+            </label>
+            <div className="relative">
+              <Input
+                id="clusterKey"
+                value={clusterKey}
+                onChange={(e) => setClusterKey(e.target.value)}
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                suffix={<InfoCircleOutlined className="text-blue-500 cursor-pointer" />}
+              />
+            </div>
+            <small className="text-gray-500">
+              Must be the same on all clustered peers
+            </small>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto bg-auto border border-gray-200 rounded-md">
+          <Table columns={columns} dataSource={clusters} pagination={false} />
+        </div>
+
+        <div className="mt-6 flex justify-start gap-2">
+          <button
+            onClick={handleClusterSave}
+            className="transition-all shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md"
+          >
+            Save
+          </button>
+          <button
+            onClick={handleClusterCancel}
+            className="transition-all shadow-md cursor-pointer border border-gray-300 hover:border-[#08027d] text-black hover:text-[#08027d] px-5 py-1 rounded-md"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    ),
+  },
+];
+
     return (
         <AppLayout>
             <Content>
-                <Tabs defaultActiveKey="cluster">
-                    <TabPane
-                        tab={
-                            <span className="flex items-center cursor-pointer text-lg font-bold px-3 py-1 bg-[#08027d] hover:bg-blue-700 text-white rounded-md">
-                                <IoAddCircleOutline />
-                            </span>
-                        }
-                        key="create"
-                    >
-                        <div className="bg-white border border-gray-300 shadow-md rounded-md p-6">
-                            <label htmlFor="newPeerHostname" className="block text-gray-700 text-sm font-bold mb-2">
-                                New peer hostname
-                            </label>
-                            <div className="relative mb-4">
-                                <Input
-                                    id="newPeerHostname"
-                                    value={newPeerHostname}
-                                    onChange={(e) => setNewPeerHostname(e.target.value)}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                    suffix={<InfoCircleOutlined className="text-blue-500 cursor-pointer" />}
-                                />
-                            </div>
-                            <div className="flex justify-start gap-2">
-                                <button 
-                                 className="transition-all shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md" 
-                                 onClick={handleCreateSave}
-                                >
-                                    Save
-                                </button>
-                                <button 
-                                onClick={handleCreateCancel} 
-                                className="transition-all shadow-md cursor-pointer border border-gray-300 hover:border-[#08027d] text-black hover:text-[#08027d] px-5 py-1 rounded-md"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </TabPane>
-                    <TabPane tab="Cluster" key="cluster">
-                      <div className='border border-gray-300 rounded-md px-5 py-5'>
-                        <div className="grid gap-4 mb-6 md:grid-cols-2">
-                            <div>
-                                <label htmlFor="peerHostname" className="block text-gray-700 text-sm font-bold mb-2">
-                                    This peer hostname
-                                </label>
-                                <div className="relative">
-                                    <Input
-                                        disabled
-                                        id="peerHostname"
-                                        value={peerHostname}
-                                        onChange={(e) => setPeerHostname(e.target.value)}
-                                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        suffix={<InfoCircleOutlined className="text-blue-500 cursor-pointer" />}
-                                    />
-                                </div>
-                                <small className="text-gray-500">
-                                    How this peer should be referred from other Flussonic Media Server peers
-                                </small>
-                            </div>
-
-                            <div>
-                                <label htmlFor="clusterKey" className="block text-gray-700 text-sm font-bold mb-2">
-                                    Cluster key
-                                </label>
-                                <div className="relative">
-                                    <Input
-                                        id="clusterKey"
-                                        value={clusterKey}
-                                        onChange={(e) => setClusterKey(e.target.value)}
-                                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        suffix={<InfoCircleOutlined className="text-blue-500 cursor-pointer" />}
-                                    />
-                                </div>
-                                <small className="text-gray-500">
-                                    Must be the same on all clustered peers
-                                </small>
-                            </div>
-                        </div>
-
-                        <div className="overflow-x-auto bg-auto border border-gray-200 rounded-md">
-                            <Table columns={columns} dataSource={clusters} pagination={false} />
-                        </div>
-
-                        <div className="mt-6 flex justify-start gap-2">
-                            <button 
-                             onClick={handleClusterSave} 
-                             className="transition-all shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md"
-                             >
-                                Save
-                            </button>
-                            <button 
-                              onClick={handleClusterCancel} 
-                              className="transition-all shadow-md cursor-pointer border border-gray-300 hover:border-[#08027d] text-black hover:text-[#08027d] px-5 py-1 rounded-md"
-                              >
-                                Cancel
-                            </button>
-                        </div>
-                      </div>
-                    </TabPane>
-                </Tabs>
+              <Tabs defaultActiveKey="cluster" items={items} />;
             </Content>
         </AppLayout>
     );

@@ -92,35 +92,56 @@ const Output = () => {
     );
   };
 
+  const items = [
+  {
+    key: '1',
+    label: <Link to="/media/overview">Overview</Link>,
+  },
+  {
+    key: '2',
+    label: <Link to="/media/input">Input</Link>,
+  },
+  {
+    key: '3',
+    label: <Link to="/media/transcoder">Transcoder</Link>,
+  },
+  {
+    key: '4',
+    label: <Link to="/media/dvr">DVR</Link>,
+  },
+  {
+    key: '5',
+    label: <Link to="/media/output">Output</Link>,
+  },
+  {
+    key: '6',
+    label: <Link to="/media/epg">EPG</Link>,
+  },
+  {
+    key: '7',
+    label: <Link to="/media/auth">Auth</Link>,
+  },
+  {
+    key: '8',
+    label: <Link to="/media/playsessions">Play sessions</Link>,
+  },
+];
+
   return (
     <AppLayout>
       {/* Tabs */}
-      <div
-        className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
-          isMobile ? "px-2" : "px-4"
-        }`}
-      >
-        <Tabs
-          defaultActiveKey="5"
-          className="mb-0"
-          size={isMobile ? "small" : "middle"}
+       <div
+          className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
+            isMobile ? "px-2" : "px-4"
+          }`}
         >
-          <TabPane tab={<Link to="/media/overview">Overview</Link>} key="1" />
-          <TabPane tab={<Link to="/media/input">Input</Link>} key="2" />
-          <TabPane
-            tab={<Link to="/media/transcoder">Transcoder</Link>}
-            key="3"
+          <Tabs
+            defaultActiveKey="5"
+            className="mb-0"
+            size={isMobile ? "small" : "middle"}
+            items={items}
           />
-          <TabPane tab={<Link to="/media/dvr">DVR</Link>} key="4" />
-          <TabPane tab={<Link to="/media/output">Output</Link>} key="5" />
-          <TabPane tab={<Link to="/media/epg">EPG</Link>} key="6" />
-          <TabPane tab={<Link to="/media/auth">Auth</Link>} key="7" />
-          <TabPane
-            tab={<Link to="/media/playsessions">Play sessions</Link>}
-            key="8"
-          />
-        </Tabs>
-      </div>
+        </div>
 
       {/* Output Tab Content */}
       <div className="p-4 h-[calc(100vh-150px)] overflow-y-auto">
@@ -353,14 +374,14 @@ const Output = () => {
                 <label className="block text-gray-700 text-sm font-bold mb-1">
                   Vertical align
                 </label>
-                <Select
+                <select
                   className="w-full placeholder:font-semibold border border-gray-400 focus:outline-none hover:border-blue-700 focus:border-blue-800 px-3 py-1.5 rounded-md"
                 >
                   <option value="- Not selected -">- Not selected -</option>
                   <option value="top">top</option>
                   <option value="middle">middle</option>
                   <option value="bottom">bottom</option>
-                </Select>
+                </select>
               </div>
             </div>
           </div>
