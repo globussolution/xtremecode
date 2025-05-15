@@ -39,7 +39,7 @@ function EPG() {
         </div>
 
         <div className="p-5">
-            <label for="EPG" className="cursor-pointer text-lg font-semibold"><input type="checkbox"  id="EPG" /> EPG </label>
+            <label className="cursor-pointer text-lg font-semibold"><input type="checkbox" /> EPG </label>
         </div>
 
         {/* Buttons */}
