@@ -23,7 +23,7 @@ const EditStream = () => {
     audio: "a1 aac stereo eng (128kbps)",
   });
   const [htmlCode] = useState(
-    '<iframe style="width:640px; height:480px;" allowfullscreen src="http://193.239.193.161/hls/HBO_Max/embed.html"></iframe>'
+    '<iframe style="width:640px; height:480px;" allowfullscreen src=""></iframe>'
   );
   const [staticToggle, setStaticToggle] = useState(true);
   const [onDemandToggle, setOnDemandToggle] = useState(false);
@@ -156,15 +156,6 @@ const EditStream = () => {
                   </Space>
                 </div>
                 <div className="relative w-full h-64 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden">
-                  {/* <img
-                    src="http://193.239.193.161/hls/HBO_Max/preview.jpg"
-                    alt="Video Preview"
-                    className="absolute inset-0 object-cover w-full h-full"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "/placeholder.png"; // Use a local placeholder image
-                    }}
-                  /> */}
                   <PlayCircleOutlined className="text-4xl text-gray-500 z-10" />
                 </div>
                 <div className="mt-4 flex gap-2">
