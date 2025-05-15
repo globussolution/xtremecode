@@ -238,9 +238,9 @@ function MediaInput() {
           <Button danger onClick={handleDeleteStream}>
             Delete Stream
           </Button>
-          <Button type="primary" onClick={handleSave}>
+          <button className="shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md" onClick={handleSave}>
             Save
-          </Button>
+          </button>
         </div>
 
         <Drawer

@@ -15,6 +15,10 @@ import Output from './Admin/Admin Pages/Media/MediaComponents/Output';
 import EPG from './Admin/Admin Pages/Media/MediaComponents/EPG';
 import Auth from './Admin/Admin Pages/Media/MediaComponents/Auth';
 import PlaySessions from './Admin/Admin Pages/Media/MediaComponents/PlaySessions';
+import Cluster from './Admin/Admin Pages/Cluster/Cluster';
+import IPTV from './Admin/Admin Pages/IPTV/IPTV';
+import IPCameras from './Admin/Admin Pages/IP Cameras/ipCameras';
+import Support from './Admin/Admin Pages/Support/Support';
 
 function App() {
 
@@ -22,6 +26,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          {/* Media Routes */}
           <Route path="/" element={<Media/>}></Route>
           <Route path="/media/create" element={<Create/>}></Route>
           <Route path="/media/templates" element={<Templates/>}></Route>
@@ -38,6 +43,18 @@ function App() {
           <Route path="/media/epg" element={<EPG/>}></Route>
           <Route path="/media/auth" element={<Auth/>}></Route>
           <Route path="/media/playsessions" element={<PlaySessions/>}></Route>
+          
+          {/* Cluster Routes */}
+          <Route path="/cluster" element={<Cluster/>}></Route>
+
+          {/* IPTV Routes */}
+          <Route path="/iptv" element={<IPTV/>}></Route>
+
+          {/* IP Cameras Routes */}
+          <Route path="/ipcameras" element={<IPCameras/>}></Route>
+
+          {/* Support Routes */}
+          <Route path="/support" element={<Support/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

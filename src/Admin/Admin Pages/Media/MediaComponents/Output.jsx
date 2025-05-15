@@ -468,9 +468,9 @@ const Output = () => {
           <Button danger>
             Delete Stream
           </Button>
-          <Button type="primary" >
+          <button className="shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md" >
             Save
-          </Button>
+          </button>
         </div>
       </div>
     </AppLayout>

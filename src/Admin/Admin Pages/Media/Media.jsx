@@ -675,7 +675,7 @@ function Media() {
             <div className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
               <Link to="/media/create">  
               <button
-                className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
+                className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 bg-[#08027d] hover:bg-blue-700 text-white rounded-md ${isMobile ? "mt-1" : ""}`}
               >
                 <IoAddCircleOutline />
               </button>

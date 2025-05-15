@@ -426,7 +426,7 @@ function Auth() {
         {/* Buttons */}
          <div className="flex justify-end gap-2">
              <Button danger>Delete Stream</Button>
-             <Button type="primary">Save</Button>
+             <button className="shadow-md cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-5 py-1 rounded-md">Save</button>
          </div>
       </div>
     </AppLayout>
