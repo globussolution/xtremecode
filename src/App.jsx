@@ -17,7 +17,7 @@ import Auth from './Admin/Admin Pages/Media/MediaComponents/Auth';
 import PlaySessions from './Admin/Admin Pages/Media/MediaComponents/PlaySessions';
 import Cluster from './Admin/Admin Pages/Cluster/Cluster';
 import IPTV from './Admin/Admin Pages/IPTV/IPTV';
-import IPCameras from './Admin/Admin Pages/IP Cameras/ipCameras';
+import IPCameras from './Admin/Admin Pages/IP Cameras/IPCameras';
 import Support from './Admin/Admin Pages/Support/Support';
 
 function App() {
