@@ -150,7 +150,11 @@ const items = [
                         </button>
                     </div>
                 ) : (
+                  <>
+                  <div className="lg:px-0 px-4">
                     <Tabs defaultActiveKey="users" items={items} />
+                  </div>   
+                  </>
                 )}
             </Content>
         </AppLayout>

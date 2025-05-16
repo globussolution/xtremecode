@@ -208,7 +208,9 @@ function Cluster() {
     return (
         <AppLayout>
             <Content>
-              <Tabs defaultActiveKey="cluster" items={items} />;
+              <div className="lg:px-0 px-4">
+                <Tabs defaultActiveKey="cluster" items={items} />
+              </div>
             </Content>
         </AppLayout>
     );

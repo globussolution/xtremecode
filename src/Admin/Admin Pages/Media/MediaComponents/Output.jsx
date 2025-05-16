@@ -146,7 +146,7 @@ const Output = () => {
       {/* Output Tab Content */}
       <div className="p-4 h-[calc(100vh-150px)] overflow-y-auto">
         {/* inputs */}
-          {/* <div className="flex items-center mb-2">
+          <div className="flex items-center mb-2">
             <div className="w-full bg-white dark:bg-gray-800shadow-lg mt-3 mb-3 pb-1 border-b border-gray-300">
               <InputWithToggle
                 label="HLS Apple HLS standard URL. All extra tracks in distinct playlists"
@@ -213,7 +213,7 @@ const Output = () => {
                 defaultValue="http://15.235.193.163/HBO_Max/recording_status.json"
               />
             </div>
-          </div> */}
+          </div>
 
         {/* CMAF Packager */}
         <div className="mb-6">
