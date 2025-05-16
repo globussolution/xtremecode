@@ -4,7 +4,6 @@ import { Card, Input, Typography, Row, Col, Form } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
 import { Link } from "react-router-dom";
-import TabPane from "antd/es/tabs/TabPane";
 import { IoAddCircleOutline } from "react-icons/io5";
 
 const { Title, Text } = Typography;
@@ -50,10 +49,19 @@ function Multiplexers() {
 
       {/* Tabs */}
        <div
-          className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
-            isMobile ? "px-2" : "px-4"
+          className={`scrollHide lg:px-0 px-2 w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
+            isMobile ? "px-2" : ""
           }`}
         >
+          <Link to="/media/create">
+            <button
+              className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${
+                isMobile ? "mt-1" : ""
+              }`}
+            >
+              <IoAddCircleOutline />
+            </button>
+          </Link>
           <Tabs
             defaultActiveKey="3"
             className="mb-0"

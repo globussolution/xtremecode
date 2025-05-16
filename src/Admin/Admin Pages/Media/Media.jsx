@@ -12,6 +12,7 @@ import {
   Dropdown,
   Radio,
   Drawer,
+  Popover,
 } from "antd";
 import {
   SearchOutlined,
@@ -839,15 +840,16 @@ function Media() {
                       <span className="mr-1">Sort By:</span> <DownOutlined />
                     </Button>
                   ) : (
-                    <Dropdown
-                      menu={sortMenu}
-                      trigger={["click"]}
+                    <Popover
+                      content={sortMenu}
+                      trigger="click"
                       placement="bottomRight"
                     >
                       <Button className="flex items-center whitespace-nowrap">
-                        <span className="mr-1">Sort By:</span> <DownOutlined />
+                        <span className="mr-1">Sort By:</span>
+                        <DownOutlined />
                       </Button>
-                    </Dropdown>
+                    </Popover>
                   )}
                   <Button
                     icon={<FilterOutlined />}

@@ -5,7 +5,6 @@ import AppLayout from "../../Admin Components/AppLayout";
 import { IoAddCircleOutline } from 'react-icons/io5';
 
 const { Content } = Layout;
-const { TabPane } = Tabs;
 
 function Cluster() {
     const [newPeerHostname, setNewPeerHostname] = useState('');
