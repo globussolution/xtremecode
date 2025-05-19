@@ -19,6 +19,7 @@ import Cluster from './Admin/Admin Pages/Cluster/Cluster';
 import IPTV from './Admin/Admin Pages/IPTV/IPTV';
 import IPCameras from './Admin/Admin Pages/IP Cameras/IPCameras';
 import Support from './Admin/Admin Pages/Support/Support';
+import Pulse from './Admin/Admin Pages/Pulse/Pulse';
 
 function App() {
 
@@ -43,7 +44,10 @@ function App() {
           <Route path="/media/epg" element={<EPG/>}></Route>
           <Route path="/media/auth" element={<Auth/>}></Route>
           <Route path="/media/playsessions" element={<PlaySessions/>}></Route>
-          
+
+          {/* Pulse Routes */}
+          <Route path="/pulse" element={<Pulse/>}></Route>
+
           {/* Cluster Routes */}
           <Route path="/cluster" element={<Cluster/>}></Route>
 

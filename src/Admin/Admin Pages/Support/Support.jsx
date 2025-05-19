@@ -22,7 +22,7 @@ function Support() {
       <AppLayout>
         <div>
           {/* Buttons */}
-           <div className='flex items-center gap-10 mt-10 lg:px-0 px-4'>
+           <div className='flex lg:flex-row flex-col lg:items-center items-start gap-10 mt-10 lg:px-0 px-4'>
              <button 
               className="px-4 py-2 cursor-pointer font-semibold bg-red-500 hover:bg-red-600 text-white rounded-md" 
               onClick={showModal}
@@ -35,9 +35,9 @@ function Support() {
            {/* Content */}
            <div className='lg:px-0 px-4'>
                <h1 className="mt-10 font-semibold text-2xl">Send server status to technical support team</h1>
-               <p className="mt-10 text-base text-gray-600 lg:w-[600px] w-[400px]">Please provide a detailed explanation of your issue. If you have already submitted a ticket through our support system, please include the ticket number.</p>
-               <p className="mt-5 text-gray-600 lg:w-[600px] w-[400px]">Your config, logs and system stats will be uploaded.</p>
-               <p className="mt-5 text-gray-600 lg:w-[600px] w-[400px]">This is not a support request. You will have to open a support request after this upload.</p>
+               <p className="mt-10 text-base text-gray-600 lg:w-[600px] w-[300px]">Please provide a detailed explanation of your issue. If you have already submitted a ticket through our support system, please include the ticket number.</p>
+               <p className="mt-5 text-gray-600 lg:w-[600px] w-[300px]">Your config, logs and system stats will be uploaded.</p>
+               <p className="mt-5 text-gray-600 lg:w-[600px] w-[300px]">This is not a support request. You will have to open a support request after this upload.</p>
                <div className="mt-5">
                  <textarea className="lg:w-[600px] w-[300px] h-24 border border-gray-300 focus:outline-none focus:border-blue-700 rounded-md"></textarea> 
                </div>
