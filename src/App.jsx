@@ -20,6 +20,7 @@ import IPTV from './Admin/Admin Pages/IPTV/IPTV';
 import IPCameras from './Admin/Admin Pages/IP Cameras/IPCameras';
 import Support from './Admin/Admin Pages/Support/Support';
 import Pulse from './Admin/Admin Pages/Pulse/Pulse';
+import Config from './Admin/Admin Pages/Config/Config';
 
 function App() {
 
@@ -47,6 +48,9 @@ function App() {
 
           {/* Pulse Routes */}
           <Route path="/pulse" element={<Pulse/>}></Route>
+
+          {/* Config Routes */}
+          <Route path="/config" element={<Config/>}></Route>
 
           {/* Cluster Routes */}
           <Route path="/cluster" element={<Cluster/>}></Route>
