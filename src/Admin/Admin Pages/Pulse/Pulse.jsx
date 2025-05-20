@@ -1413,8 +1413,13 @@ function Pulse() {
     <>
       <AppLayout>
         <div className="lg:px-0 px-5 h-[calc(120vh-200px)] overflow-y-auto">
+              {/* Mobile Title */}
+              <div className="md:hidden mt-5">
+                <h1 className="text-2xl font-semibold">Pulse</h1>
+              </div>
+
           {/* Input and Button */}
-          <div className="mt-12">
+          <div className="lg:mt-12 mt-8">
             <input
               className="Input w-full border-b-2 py-2 border-gray-400 placeholder:font-semibold focus:placeholder:text-[#021d7d] hover:border-[#08027d] focus:border-[#08027d] focus:outline-none"
               type="text"

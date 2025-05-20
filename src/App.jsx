@@ -21,6 +21,11 @@ import IPCameras from './Admin/Admin Pages/IP Cameras/IPCameras';
 import Support from './Admin/Admin Pages/Support/Support';
 import Pulse from './Admin/Admin Pages/Pulse/Pulse';
 import Config from './Admin/Admin Pages/Config/Config';
+import ConfigEditor from './Admin/Admin Pages/Config/ConfigComponents/ConfigEditor';
+import ConfigDVR from './Admin/Admin Pages/Config/ConfigComponents/ConfigDVR';
+import ConfigAuth from './Admin/Admin Pages/Config/ConfigComponents/ConfigAuth'
+import AuthBackends from './Admin/Admin Pages/Config/ConfigComponents/AuthBackends'
+import Events from './Admin/Admin Pages/Config/ConfigComponents/Events'
 
 function App() {
 
@@ -51,6 +56,11 @@ function App() {
 
           {/* Config Routes */}
           <Route path="/config" element={<Config/>}></Route>
+          <Route path="/config/configeditor" element={<ConfigEditor/>}></Route>
+          <Route path="/config/dvr" element={<ConfigDVR/>}></Route>
+          <Route path="/config/auth" element={<ConfigAuth/>}></Route>
+          <Route path="/config/authbackends" element={<AuthBackends/>}></Route>
+          <Route path="/config/events" element={<Events/>}></Route>
 
           {/* Cluster Routes */}
           <Route path="/cluster" element={<Cluster/>}></Route>

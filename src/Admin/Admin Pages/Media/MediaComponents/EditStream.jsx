@@ -3,9 +3,7 @@ import { Tabs, Button, Input, Select, Switch, Space, Card } from "antd";
 import { Link } from "react-router-dom";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import AppLayout from "../../../Admin Components/AppLayout";
-
-const { TabPane } = Tabs;
-const { Option } = Select;
+import { FaChevronLeft } from "react-icons/fa";
 
 const EditStream = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -86,9 +84,13 @@ const EditStream = () => {
   return (
     <AppLayout>
       <div className="min-h-screen">
+        <div className="mb-5 mt-8 lg:px-0 px-3">
+           <Link className="flex items-center gap-2 font-semibold text-blue-700" to="/"><FaChevronLeft className="text-sm"/> Back to media</Link>
+        </div>
+
         {/* Tabs */}
         <div
-          className={`scrollHide lg:px-0 px-4 w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
+          className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
             isMobile ? "px-2" : "px-4"
           }`}
         >

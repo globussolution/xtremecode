@@ -751,30 +751,13 @@ function Media() {
               }}
             >
               {/* Mobile Title */}
-              <div className="md:hidden px-4 py-2">
-                <h1 className="text-xl font-semibold">Streams</h1>
+              <div className="md:hidden px-4 py-2 mb-5 mt-3">
+                <h1 className="text-2xl font-semibold">Streams</h1>
               </div>
 
               {/* Tabs */}
-              {/* <div className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
-              <Link to="/media/create">  
-              <button
-                className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 bg-[#08027d] hover:bg-blue-700 text-white rounded-md ${isMobile ? "mt-1" : ""}`}
-              >
-                <IoAddCircleOutline />
-              </button>
-              </Link>
-              <Tabs defaultActiveKey="1" className="mb-0" size={isMobile ? "small" : "middle"}>
-                <TabPane tab={<Link to="/">Streams</Link>} key="1" />
-                <TabPane tab={<Link to="/media/templates">Templates</Link>} key="2" />
-                <TabPane tab={<Link to="/media/multiplexers">Multiplexers</Link>} key="3" />
-                <TabPane tab={<Link to="/media/sources">Sources</Link>} key="4" />
-                <TabPane tab={<Link to="/media/vods">VODs</Link>} key="5" />
-                <TabPane tab={<Link to="/media/dvbcards">DVB cards</Link>} key="6" />
-              </Tabs>
-            </div> */}
               <div
-                className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
+                className={`scrollHide lg:px-0 px-4 w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
                   isMobile ? "px-2" : ""
                 }`}
               >

@@ -1,9 +1,9 @@
 import { Tabs } from "antd";
-import AppLayout from "../../Admin Components/AppLayout";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import AppLayout from "../../../Admin Components/AppLayout";
 
-function Config(){
+function ConfigDVR(){
 
     const [isMobile, setIsMobile] = useState(false);
 
@@ -39,7 +39,7 @@ function Config(){
            <AppLayout>
             {/* Mobile Title */}
               <div className="md:hidden px-4 py-2 mb-5 mt-3">
-                <h1 className="text-2xl font-semibold">Setting</h1>
+                <h1 className="text-2xl font-semibold">DVR</h1>
               </div>
 
             <div
@@ -48,7 +48,7 @@ function Config(){
                 }`}
               >
                 <Tabs
-                  defaultActiveKey="1"
+                  defaultActiveKey="3"
                   className="mb-0"
                   size={isMobile ? "small" : "middle"}
                   items={items}
@@ -59,4 +59,4 @@ function Config(){
     )
 }
 
-export default Config;
+export default ConfigDVR;

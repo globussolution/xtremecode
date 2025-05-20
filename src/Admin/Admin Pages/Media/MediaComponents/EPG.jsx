@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Tabs } from "antd";
 import { Link } from "react-router-dom";
 import TabPane from "antd/es/tabs/TabPane";
+import { FaChevronLeft } from "react-icons/fa";
 
 function EPG() {
   const [isMobile, setIsMobile] = useState(false);
@@ -44,6 +45,10 @@ function EPG() {
   return (
     <>
       <AppLayout>
+        <div className="mb-5 mt-8 lg:px-0 px-3">
+           <Link className="flex items-center gap-2 font-semibold text-blue-700" to="/"><FaChevronLeft className="text-sm"/> Back to media</Link>
+        </div>
+
         {/* Tabs */}
        <div
           className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${

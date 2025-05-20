@@ -1,14 +1,14 @@
-import { useState } from "react"
+import { useState } from "react";
 import AppLayout from "../../../Admin Components/AppLayout";
-import { Table, Card, Typography, Tabs } from "antd"
-import { IoAddCircleOutline } from "react-icons/io5"
-import { Link } from "react-router-dom"
+import { Table, Card, Typography, Tabs } from "antd";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import TabPane from "antd/es/tabs/TabPane";
 
-const { Title } = Typography
+const { Title } = Typography;
 
 function DVBCards() {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   const columns = [
     {
@@ -26,11 +26,11 @@ function DVBCards() {
       dataIndex: "id",
       key: "id",
     },
-  ]
+  ];
 
-  const data = []
+  const data = [];
 
-      const items = [
+  const items = [
     {
       key: "1",
       label: <Link to="/">Streams</Link>,
@@ -57,31 +57,36 @@ function DVBCards() {
     },
   ];
 
-
   return (
     <AppLayout>
-        {/* Mobile Title */}
-        <div className="md:hidden px-4 py-2">
-           <h1 className="text-xl font-semibold">DVB cards</h1>
-        </div>
+      {/* Mobile Title */}
+      <div className="md:hidden px-4 py-2 mb-5 mt-3">
+        <h1 className="text-xl font-semibold">DVB cards</h1>
+      </div>
 
-       {/* Tabs */}
-<div className={`scrollHide w-full overflow-x-auto lg:px-0 px-2 flex items-center gap-2 border-b border-gray-200 ${isMobile ? "px-2" : ""}`}>
-  <Link to="/media/create">
-    <button
-      className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${isMobile ? "mt-1" : ""}`}
-    >
-      <IoAddCircleOutline />
-    </button>
-  </Link>
-  <Tabs
-    defaultActiveKey="6"
-    className="mb-0"
-    size={isMobile ? "small" : "middle"}
-    items={items}
-  />
-</div>
-        
+      {/* Tabs */}
+      <div
+        className={`scrollHide w-full overflow-x-auto lg:px-0 px-2 flex items-center gap-2 border-b border-gray-200 ${
+          isMobile ? "px-2" : ""
+        }`}
+      >
+        <Link to="/media/create">
+          <button
+            className={`cursor-pointer text-xl font-bold px-3 py-1 mr-5 text-white bg-[#08027d] rounded-md ${
+              isMobile ? "mt-1" : ""
+            }`}
+          >
+            <IoAddCircleOutline />
+          </button>
+        </Link>
+        <Tabs
+          defaultActiveKey="6"
+          className="mb-0"
+          size={isMobile ? "small" : "middle"}
+          items={items}
+        />
+      </div>
+
       <Card
         title={
           <div className="flex justify-between items-center">
@@ -104,7 +109,7 @@ function DVBCards() {
         />
       </Card>
     </AppLayout>
-  )
+  );
 }
 
 export default DVBCards;
