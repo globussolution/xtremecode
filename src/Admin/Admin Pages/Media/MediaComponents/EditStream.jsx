@@ -4,6 +4,30 @@ import { Link } from "react-router-dom";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import AppLayout from "../../../Admin Components/AppLayout";
 import { FaChevronLeft } from "react-icons/fa";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  LinearScale,
+  TimeScale,
+  Tooltip,
+  Legend,
+  Filler,
+  CategoryScale,
+} from "chart.js";
+import "chartjs-adapter-date-fns";
+
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  TimeScale,
+  Tooltip,
+  Legend,
+  Filler,
+  CategoryScale
+);
 
 const EditStream = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -11,7 +35,6 @@ const EditStream = () => {
   const [title, setTitle] = useState("Title");
   const [description, setDescription] = useState("Description");
   const [template, setTemplate] = useState("");
-  const [isOnline, setIsOnline] = useState(true);
   const [inputMediaInfo] = useState({
     video: "v1 h264 320x240 (200kbps)",
     audio: "a1 aac stereo eng (128kbps)",
@@ -80,12 +103,112 @@ const EditStream = () => {
     },
   ];
 
+  // chart Data
+  const dataChart = {
+    labels: ["20:23.05", "20:23.10", "20:23.15", "20:23.20", "20:23.25"],
+    datasets: [
+      {
+        label: "In",
+        data: [10000, 20000, 15000, 76118, 30000],
+        borderColor: "red",
+        backgroundColor: "transparent",
+        pointBorderColor: "red",
+        pointBackgroundColor: "#fff",
+        borderWidth: 1.5,
+        tension: 0.3,
+      },
+      {
+        label: "Out",
+        data: [2000, 4000, 3500, 5524, 4500],
+        borderColor: "green",
+        backgroundColor: "transparent",
+        pointBorderColor: "green",
+        pointBackgroundColor: "#fff",
+        borderWidth: 1.5,
+        tension: 0.3,
+      },
+      {
+        label: "Clients",
+        data: [1, 1, 1, 1, 1],
+        borderColor: "blue",
+        yAxisID: "y1",
+        pointBorderColor: "blue",
+        pointBackgroundColor: "#fff",
+        borderWidth: 1.5,
+        tension: 0.3,
+      },
+    ],
+  };
+
+  const optionsChart = {
+    responsive: true,
+    interaction: {
+      mode: "index",
+      intersect: false,
+    },
+    stacked: false,
+    plugins: {
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: (context) => {
+            if (context.dataset.label === "Clients") {
+              return `🟦 Clients: ${context.raw}`;
+            }
+            return `${context.dataset.label}: ${context.raw.toLocaleString()}`;
+          },
+        },
+      },
+      legend: {
+        display: true,
+        labels: {
+          usePointStyle: true,
+          pointStyle: "circle",
+        },
+      },
+    },
+    scales: {
+      y: {
+        type: "linear",
+        position: "left",
+        min: 0,
+        max: 1900000,
+        ticks: {
+          stepSize: 1000000,
+          callback: (value) => `${(value / 1000000).toFixed(1)}MB`,
+        },
+      },
+      y1: {
+        type: "linear",
+        position: "right",
+        min: 0,
+        max: 1,
+        grid: {
+          drawOnChartArea: false,
+        },
+        ticks: {
+          stepSize: 0.5,
+        },
+      },
+      x: {
+        type: "category",
+        ticks: {
+          callback: (val, index) => dataChart.labels[index],
+        },
+      },
+    },
+  };
 
   return (
     <AppLayout>
       <div className="min-h-screen">
         <div className="mb-5 mt-8 lg:px-0 px-3">
-           <Link className="flex items-center gap-2 font-semibold text-blue-700" to="/"><FaChevronLeft className="text-sm"/> Back to media</Link>
+          <Link
+            className="flex items-center gap-2 font-semibold text-blue-700"
+            to="/"
+          >
+            <FaChevronLeft className="text-sm" /> Back to media
+          </Link>
         </div>
 
         {/* Tabs */}
@@ -103,7 +226,7 @@ const EditStream = () => {
         </div>
 
         {/* Main Content */}
-        <div className="p-4 md:p-6 lg:p-4 mt-5 h-[calc(100vh-150px)] overflow-y-auto">
+        <div className="p-4 md:p-6 lg:p-4 mt-5 h-[calc(100vh-200px)] overflow-y-auto">
           {/* Top Row with Name, Title, Description, Template */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <Input
@@ -129,9 +252,9 @@ const EditStream = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Column */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-1">
               <Card className="mb-6">
                 <div className="flex items-center justify-between mb-4">
                   <Space>
@@ -188,7 +311,23 @@ const EditStream = () => {
             {/* Right Column */}
             <div>
               <Card className="mb-6">
-                <h3 className="font-semibold mb-2">Online</h3>
+                <div className="flex justify-between items-center mb-5">
+                  <h3 className="font-semibold px-3 mb-2 border border-green-500 bg-green-100 rounded-full">
+                    Online
+                  </h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <Space>
+                      <Switch
+                        checked={sdToggle}
+                        onChange={setSdToggle}
+                        size="small"
+                      />{" "}
+                      SD
+                      <span>{bitrate}</span>
+                    </Space>
+                    <span>{duration}</span>
+                  </div>
+                </div>
                 <div className="mb-4">
                   <p className="font-medium">Input media info</p>
                   <p className="text-gray-600">{inputMediaInfo.video}</p>
@@ -201,23 +340,10 @@ const EditStream = () => {
                 </div>
               </Card>
 
+              {/* Chart */}
               <Card>
-                <div className="flex items-center justify-between mb-2">
-                  <Space>
-                    <Switch
-                      checked={sdToggle}
-                      onChange={setSdToggle}
-                      size="small"
-                    />{" "}
-                    SD
-                    <span>{bitrate}</span>
-                  </Space>
-                  <span>{duration}</span>
-                </div>
-                <div className="h-48 bg-gray-200 rounded-md flex items-center justify-center">
-                  <span className="text-gray-700">
-                    Graph Placeholder (In/Out/Clients)
-                  </span>
+                <div className="lg:w-[450px] h-64 w-[330px] border border-gray-400 p-3">
+                  <Line data={dataChart} options={optionsChart} />
                 </div>
               </Card>
             </div>
@@ -237,67 +363,3 @@ const EditStream = () => {
 };
 
 export default EditStream;
-
-// import { Link } from "react-router-dom";
-// import AppLayout from "../../../Admin Components/AppLayout";
-// import { useState } from "react";
-// import { Tabs } from "antd";
-
-// function EditStream(){
-//    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-//     const items = [
-//     {
-//       key: "1",
-//       label: <Link to="/media/overview">Overview</Link>,
-//     },
-//     {
-//       key: "2",
-//       label: <Link to="/media/input">Input</Link>,
-//     },
-//     {
-//       key: "3",
-//       label: <Link to="/media/transcoder">Transcoder</Link>,
-//     },
-//     {
-//       key: "4",
-//       label: <Link to="/media/dvr">DVR</Link>,
-//     },
-//     {
-//       key: "5",
-//       label: <Link to="/media/output">Output</Link>,
-//     },
-//     {
-//       key: "6",
-//       label: <Link to="/media/epg">EPG</Link>,
-//     },
-//     {
-//       key: "7",
-//       label: <Link to="/media/auth">Auth</Link>,
-//     },
-//     {
-//       key: "8",
-//       label: <Link to="/media/playsessions">Play sessions</Link>,
-//     },
-//   ];
-
-//   return(
-//     <>
-//       <AppLayout>
-//          <div
-//            className={`scrollHide w-full overflow-x-auto flex items-center gap-2 border-b border-gray-200 ${
-//              isMobile ? "px-2" : "px-4"
-//            }`}
-//          >
-//            <Tabs
-//              defaultActiveKey="1"
-//              className="mb-0"
-//              size={isMobile ? "small" : "middle"}
-//              items={items}
-//            />
-//          </div>
-//       </AppLayout>
-//     </>
-//   )
-// }
-
-// export default EditStream;

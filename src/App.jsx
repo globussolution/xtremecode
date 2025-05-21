@@ -26,6 +26,7 @@ import ConfigDVR from './Admin/Admin Pages/Config/ConfigComponents/ConfigDVR';
 import ConfigAuth from './Admin/Admin Pages/Config/ConfigComponents/ConfigAuth'
 import AuthBackends from './Admin/Admin Pages/Config/ConfigComponents/AuthBackends'
 import Events from './Admin/Admin Pages/Config/ConfigComponents/Events'
+import Login from './Auth/Login';
 
 function App() {
 
@@ -33,6 +34,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          {/* Login Routes */}
+          <Route path="/login" element={<Login/>}></Route>
+
           {/* Media Routes */}
           <Route path="/" element={<Media/>}></Route>
           <Route path="/media/create" element={<Create/>}></Route>

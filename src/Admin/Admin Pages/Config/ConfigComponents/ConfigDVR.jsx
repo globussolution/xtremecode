@@ -1,13 +1,13 @@
 import { Tabs, Input, Select, Checkbox, TimePicker, Form } from "antd";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react"; 
-import AppLayout from "../../../Admin Components/AppLayout"; 
+import { useState, useEffect } from "react";
+import AppLayout from "../../../Admin Components/AppLayout";
 import {
   InfoCircleOutlined,
   DeleteOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import moment from "moment"; 
+import moment from "moment";
 
 const { Option } = Select;
 
@@ -204,7 +204,7 @@ function ConfigDVR() {
             form={form}
             layout="vertical"
             className="grid grid-cols-1 lg:grid-cols-3 gap-4"
-            onFinish={onFinish} 
+            onFinish={onFinish}
           >
             {/* NewDvr1 section */}
             <div className="lg:col-span-3 mb-4">
@@ -255,7 +255,9 @@ function ConfigDVR() {
               </Form.Item>
 
               <Form.Item label="Copy chunks to this location" name="copyChunks">
-                <Input suffix={<InfoCircleOutlined className="text-gray-400" />} />
+                <Input
+                  suffix={<InfoCircleOutlined className="text-gray-400" />}
+                />
               </Form.Item>
             </div>
 
@@ -269,7 +271,9 @@ function ConfigDVR() {
                 label="Cached metadata subdirectory"
                 name="cachedMetadata"
               >
-                <Input suffix={<InfoCircleOutlined className="text-gray-400" />} />
+                <Input
+                  suffix={<InfoCircleOutlined className="text-gray-400" />}
+                />
               </Form.Item>
 
               <div className="mb-4 flex items-center space-x-2">
@@ -292,22 +296,39 @@ function ConfigDVR() {
                 Limits
                 <InfoCircleOutlined className="text-gray-400 cursor-pointer" />
               </h3>
-              <Form.Item label="Maximum disk consumption" name="maxDiskConsumption">
+              <Form.Item
+                label="Maximum disk consumption"
+                name="maxDiskConsumption"
+              >
                 <Input suffix="%" />
               </Form.Item>
 
-              <Form.Item label="Maximum disk consumption" name="maxDiskConsumption2">
-                <Input suffix={<InfoCircleOutlined className="text-gray-400" />} />
-                <div className="text-xs text-gray-500 mt-1">
-                  Available size formats: 32Gb, 4Tb...
-                </div>
+              <Form.Item
+                label="Maximum disk consumption"
+                name="maxDiskConsumption2"
+                extra={
+                  <div className="text-xs text-gray-500 mt-1">
+                    Available size formats: 32Gb, 4Tb...
+                  </div>
+                }
+              >
+                <Input
+                  suffix={<InfoCircleOutlined className="text-gray-400" />}
+                />
               </Form.Item>
 
-              <Form.Item label="Archive depth" name="archiveDepth">
-                <Input suffix={<InfoCircleOutlined className="text-gray-400" />} />
-                <div className="text-xs text-gray-500 mt-1">
-                  Available time formats: 3600s, 900m, 9h, 7d, 5w
-                </div>
+              <Form.Item
+                label="Archive depth"
+                name="archiveDepth"
+                extra={
+                  <div className="text-xs text-gray-500 mt-1">
+                    Available time formats: 3600s, 900m, 9h, 7d, 5w
+                  </div>
+                }
+              >
+                <Input
+                  suffix={<InfoCircleOutlined className="text-gray-400" />}
+                />
               </Form.Item>
             </div>
 
@@ -337,7 +358,12 @@ function ConfigDVR() {
                       placeholder="Start Time"
                       className="w-24"
                       onChange={(time, timeString) =>
-                        handleScheduleTimeChange(time, timeString, index, "startTime")
+                        handleScheduleTimeChange(
+                          time,
+                          timeString,
+                          index,
+                          "startTime"
+                        )
                       }
                       value={range.startTime} // Controlled component ke liye
                     />
@@ -353,7 +379,12 @@ function ConfigDVR() {
                       placeholder="End Time"
                       className="w-24"
                       onChange={(time, timeString) =>
-                        handleScheduleTimeChange(time, timeString, index, "endTime")
+                        handleScheduleTimeChange(
+                          time,
+                          timeString,
+                          index,
+                          "endTime"
+                        )
                       }
                       value={range.endTime} // Controlled component ke liye
                     />
@@ -414,7 +445,9 @@ function ConfigDVR() {
                   >
                     <Select
                       className="w-auto"
-                      onChange={(value) => handleDiskSelectChange(value, index, "mode")}
+                      onChange={(value) =>
+                        handleDiskSelectChange(value, index, "mode")
+                      }
                       value={disk.mode} // Controlled component ke liye
                     >
                       <Option value="not-selected">- Not selected -</Option>
@@ -432,7 +465,10 @@ function ConfigDVR() {
 
             {/* Submit Button */}
             <div className="lg:col-span-3 text-left">
-              <button type="submit" className="shadow-md mb-5 cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-4 py-1.5 rounded-md">
+              <button
+                type="submit"
+                className="shadow-md mb-5 cursor-pointer bg-[#08027d] hover:bg-blue-700 text-white px-4 py-1.5 rounded-md"
+              >
                 Save DVR Settings
               </button>
             </div>

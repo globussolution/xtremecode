@@ -35,7 +35,7 @@ const items = [
   getItem("IPTV", "5", <RiTv2Fill />, null, "/iptv"),
   getItem("IP Cameras", "6", <PiSecurityCameraFill />, null, "/ipcameras"),
   getItem("Support", "7", <FaHeadset />, null, "/support"),
-  getItem("Logout", "8", <BiLogOut />, null, "/logout"),
+  getItem("Logout", "8", <BiLogOut />, null, "/login"),
 ];
 
 const AppLayout = ({ children, fullLogo = defaultFullLogo, smallLogo = defaultSmallLogo }) => {
