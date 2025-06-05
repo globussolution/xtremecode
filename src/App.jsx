@@ -8,10 +8,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Admin/>}></Route>
+          {/* <Route path="/" element={<Admin/>}></Route> */}
         </Routes>
       </BrowserRouter>
-      
     </>
   )
 }
